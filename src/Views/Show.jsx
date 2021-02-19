@@ -35,9 +35,7 @@ const Show = () => {
             (o) => o.name.toString().toLowerCase().includes(search.toLowerCase()) ||
              o.status.toString().toLowerCase().includes(search.toLowerCase()) ||
              o.language.toString().toLowerCase().includes(search.toLowerCase()) 
-
         )
-
 
       let slice = [...filteredData].slice(offset, offset + perPage);
       setData(slice);
@@ -61,7 +59,7 @@ const Show = () => {
       searchData()
   }
 
-  const liveSearch=(e)=>{
+  const liveSearch= async (e)=>{
     setSearch(e.target.value)
     searchData()
 }
