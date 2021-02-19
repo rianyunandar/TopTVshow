@@ -13,7 +13,7 @@ const Show = () => {
 
   const getData = async () => {
     try {
-      let { data } = await axios.get(`http://api.tvmaze.com/shows`, {
+      let { data } = await axios.get(`https://api.tvmaze.com/shows`, {
         crossDomain: true
       });
       let slice = data.slice(offset, offset + perPage);
@@ -27,7 +27,7 @@ const Show = () => {
 
   const searchData = async () => {
     try {
-      await axios.get(`http://api.tvmaze.com/shows`, {
+      await axios.get(`https://api.tvmaze.com/shows`, {
         crossDomain: true
       }).then((res)=>{
 
