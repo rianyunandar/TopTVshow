@@ -30,7 +30,7 @@ export class Home extends Component  {
 
    async datahandler(){
        try{
-           await axios.get(`http://api.tvmaze.com/shows`,{crossDomain:true})
+           await axios.get(`https://api.tvmaze.com/shows`,{crossDomain:true})
            .then( async (res) => {
               let resData = res.data.sort(function(a,b){
                   return a.rating.average < b.rating.average
@@ -47,7 +47,7 @@ export class Home extends Component  {
         })
     
              } catch(error){
-           alert(JSON.stringity(error.message))
+           alert(JSON.stringify(error.message))
        }
    }
    
@@ -55,7 +55,7 @@ export class Home extends Component  {
    async datahandler2(){
     try{
        
-     await axios.get(`http://api.tvmaze.com/schedule`,{crossDomain:true})
+     await axios.get(`https://api.tvmaze.com/schedule`,{crossDomain:true})
         .then( async (res) => {
            let resData = res.data ;
            let spliceData = resData.slice(this.state.offset,this.state.offset +this.state.perPage);
@@ -65,7 +65,7 @@ export class Home extends Component  {
          })
      })
      } catch(error){
-        alert(JSON.stringity(error.message))
+        alert(JSON.stringify(error.message))
     }
 }
     componentDidMount(){
