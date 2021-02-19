@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import "./bootstrap.min.css"
 import './index.css';
 
+
 ReactDOM.render(
   
   <Router>
+  <Auth0ProviderWithHistory>
     <App />
-  </Router>,
+    </Auth0ProviderWithHistory>
+  </Router>
+  ,
   document.getElementById('root')
 );
 

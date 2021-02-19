@@ -9,7 +9,7 @@ const Show = () => {
   const [perPage] = useState(12);
   const [pageCount, setPageCount] = useState(0);
   const [offset, setOffset] = useState(0);
-  const [search, setSffset] = useState("");
+  const [search, setSearch] = useState("");
 
   const getData = async () => {
     try {
@@ -25,6 +25,30 @@ const Show = () => {
     }
   };
 
+  const searchData = async () => {
+    try {
+      await axios.get(`http://api.tvmaze.com/shows`, {
+        crossDomain: true
+      }).then((res)=>{
+
+        let filteredData = res.data.filter(
+            (o) => o.name.toString().toLowerCase().includes(search.toLowerCase()) ||
+             o.status.toString().toLowerCase().includes(search.toLowerCase()) ||
+             o.language.toString().toLowerCase().includes(search.toLowerCase()) 
+
+        )
+
+
+      let slice = [...filteredData].slice(offset, offset + perPage);
+      setData(slice);
+      setPageCount(Math.ceil(data.length / perPage));
+      setLoading(false);
+    })
+    } catch (error) {
+      alert(JSON.stringify(error.message));
+    }
+  };
+
   useEffect(() => {getData()}, [offset]);
   
   const handlePageClick =(e) =>{
@@ -32,16 +56,26 @@ const Show = () => {
     setOffset(selected * perPage)
   }
 
+  const submithandler=(e)=>{
+      e.preventDefault()
+      searchData()
+  }
+
+  const liveSearch=(e)=>{
+    setSearch(e.target.value)
+    searchData()
+}
+
   return <>
   <Container>
     <h2>Database TV Show</h2>
     <Row>
         <Col>
-        <form 
+        <form onSubmit={submithandler} 
         >
-            {/*  onSubmit={} 
-            value={}*/}
-<input placeholder="Find By name , Language , Airing Status "
+             
+            
+<input value={search} type="text" onChange={liveSearch} placeholder="Find By name , Language , Airing Status "
 style={{width:"80%" , marginTop:"20px"}}/>
 <span>  </span>
 
