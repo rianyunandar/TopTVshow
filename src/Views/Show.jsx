@@ -29,7 +29,7 @@ const Show = () => {
     try {
       await axios.get(`https://api.tvmaze.com/shows`, {
         crossDomain: true
-      }).then((res)=>{
+      }).then(async(res)=>{
 
         let filteredData = res.data.filter(
             (o) => o.name.toString().toLowerCase().includes(search.toLowerCase()) ||
@@ -37,7 +37,7 @@ const Show = () => {
              o.language.toString().toLowerCase().includes(search.toLowerCase()) 
         )
 
-      let slice = [...filteredData].slice(offset, offset + perPage);
+      let slice = await [...filteredData].slice(offset, offset + perPage);
       setData(slice);
       setPageCount(Math.ceil(data.length / perPage));
       setLoading(false);
